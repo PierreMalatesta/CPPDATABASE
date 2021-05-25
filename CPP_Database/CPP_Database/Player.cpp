@@ -1,6 +1,7 @@
-#include "Player.h"
 #include <iostream>
 #include <string.h>
+#include "Player.h"
+#include "iostreamutils.h"
 
 Player::Player(const char* _name, unsigned int_highscore)
 {
@@ -12,5 +13,25 @@ Player::Player(const char* _name, unsigned int_highscore)
 
 void Player::Draw()
 {
-	std::cout << name << ", " << highScore << std::endl;
+	std::cout << highScore  << ", " << name << std::endl;
+}
+
+bool Player::LoadFromConsole()
+{
+	cinclear();	//Clear pending input & error flags
+
+	std::cout << "Enter player name>";
+	std::cin >> name;
+	std::cout << "Enter player score>";
+	std::cin >> highScore;
+
+	if (highScore > MaxScore)
+		highScore = MaxScore;
+
+	return true;
+}
+
+bool Player::operator<(const Player& other)
+{
+	return (highScore < other.highScore);
 }

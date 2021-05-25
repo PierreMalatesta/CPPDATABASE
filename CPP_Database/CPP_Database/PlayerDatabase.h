@@ -7,7 +7,7 @@ class PlayerDatabase :
 	public Game
 {
 public:
-
+	const char* Leaderboardfilename = "leaderboard.dat";
 
 protected:
 	//Game Override
@@ -26,5 +26,10 @@ private:
 
 	void displayMenu();
 	std::string getMenuOption();
+	void addnewPlayer();
+	void modifyPlayerByIndex();
+	void modifyPlayerByName();
+	void hackTheLeaderboardFile();
+	//void sortLeaderboardByScore();
 };
 

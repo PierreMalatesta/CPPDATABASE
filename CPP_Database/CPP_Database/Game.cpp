@@ -11,8 +11,8 @@ void Game::Run()
 
 	while (IsGameRunning())
 	{
-		Update();
 		Draw();
+		Update();
 	}
 
 	Shutdown();

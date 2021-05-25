@@ -149,12 +149,14 @@
   <ItemGroup>
     <ClCompile Include="CPP_Database.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="iostreamutils.cpp" />
     <ClCompile Include="Leaderboard.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerDatabase.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
+    <ClInclude Include="iostreamutils.h" />
     <ClInclude Include="Leaderboard.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerDatabase.h" />
