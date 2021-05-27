@@ -94,14 +94,9 @@ void PlayerDatabase::Update()
 		hackTheLeaderboardFile();
 	}
 
-	else if (menuOption == "s")
+	else if (menuOption == "b")
 	{
-		if (!leaderboard.Save(Leaderboardfilename))
-		{
-			std::cerr << "Error saving file:" << Leaderboardfilename << std::endl;
-			cinclear();
-			int ch = getchar();
-		}
+		leaderboard.SortByHighScore();
 	}
 
 	else if (menuOption == "c")
@@ -195,11 +190,12 @@ void PlayerDatabase::modifyPlayerByName()
 
 	if (leaderboard.BinarySearch(name, pos))
 	{
+
 		//Update the player data
 		leaderboard[pos].LoadFromConsole();
 
 		//sort players by highscore
-		leaderboard.SortByHighScore();
+		leaderboard.SortByName();
 	}
 }
 
