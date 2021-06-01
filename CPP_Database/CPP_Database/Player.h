@@ -7,7 +7,7 @@ public:
 	static const unsigned int MaxScore = 10000;
 	static const unsigned int MaxNameLength = 50;
 
-	Player(const char* _name = "", unsigned int_highscore = 0);
+	Player(const char* _name = "", unsigned int highscore = 0);
 
 	unsigned int GetHighScore() const { return highScore; }
 	const char* GetName() const { return name; }

@@ -124,7 +124,7 @@ void PlayerDatabase::displayMenu()
 	std::cout << "A)dd player" << std::endl;
 	std::cout << "M)odify player" << std::endl;
 	std::cout << "Sort by N)ame" << std::endl;
-	std::cout << "S)ort by highscore" << std::endl;
+	std::cout << "B)Sort by highscore" << std::endl;
 	std::cout << "C)lear leaderboard" << std::endl;
 	std::cout << "L)oad filedata" << std::endl;
 	std::cout << "S)ave filedata" << std::endl;

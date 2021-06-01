@@ -3,12 +3,10 @@
 #include "Player.h"
 #include "iostreamutils.h"
 
-Player::Player(const char* _name, unsigned int_highscore)
+Player::Player(const char* _name, unsigned int highscore)
 {
 	strcpy_s(this->name, MaxNameLength, _name);
 	this->highScore = highScore;
-
-
 }
 
 void Player::Draw()

@@ -139,58 +139,7 @@ int binarySearch(int array[], int start_index, int end_index, int key)
 	return 1;
 }
 
-/*
-bool Leaderboard::Load(const char* filename)
-{
 
-	std::ifstream fin( filename, std::ios_base::in | std::ios_base::binary);
-	if (fin.good())
-	{
-		//Read the max players, reallocate the playerlist to hold this many players
-		unsigned int maxPlayers;
-			fin.read((char*)&maxPlayers, sizeof(unsigned int));
-
-			if (maxPlayers > MaxLeaderboardSize)
-			{
-				std::cerr << "Leaderboard:: Invalid file format. maxPlayers is too large" << std::endl;
-				fin.close();
-				return false;
-				//throw std::exception("Invalid file data");
-			}
-
-			//Reallocate our playerList if its a different size to that from the file
-			if (this->maxPlayers != maxPlayers)
-			{
-				this->maxPlayers = maxPlayers; 
-				delete[] this->playerList; 
-				this->playerList = new Player[maxPlayers];
-			}
-
-		//Read the players in use
-
-			unsigned int playersInUse;
-			fin.read((char*)&playersInUse, sizeof(unsigned int));
-
-			if (playersInUse > maxPlayers)
-			{
-				std::cerr << "Leaderboard:: Invalid file format. playersInUse is too large" << std::endl;
-				fin.close();
-				return false;
-				//throw std::exception("Invalid file data");
-			}
-
-			this->playersInUse = playersInUse;
-
-		//Read the array of players (up to players in use)
-			fin.read((char*)playerList, (std::streamsize)(playersInUse * sizeof(Player)));
-
-		fin.close();
-		return true;
-	}
-
-	return false;
-}
-*/
 bool Leaderboard::Load(const char* filename)
 {
 	std::fstream file;
@@ -205,52 +154,31 @@ bool Leaderboard::Load(const char* filename)
 
 		playerList = new Player[maxPlayers];
 
-		while (!file.eof() && file.peek() != EOF)//read lines until run out of lines
+		for (int i = 0; i < playersInUse; i++) //read lines until run out of lines
 		{
-			char* __name;
-			unsigned int __highscore = 0;
-
-			file.read((char*)&__name, sizeof(const char*)); 
-			file.read((char*)&__highscore, sizeof(unsigned int));
-
-			Player p = Player(__name, __highscore);
-			//set playerList[index]
-
-			playerList[index] = p;
-
-			index++; //index so we know which player we're on
+			file.read((char*)&playerList[i], sizeof(Player));
 		}
 		file.close();
 
+		return true;
 	}
-	return 0;
+	return false;
 }
 
 bool Leaderboard::Save(const char* filename)
 {
-	/*std::ofstream fout(filename, std::ios_base::out | std::ios_base::binary);
-
-	if (fout.good())
-	{
-		//write out maxplayers to file 
-		fout.write((const char*)&maxPlayers, sizeof(maxPlayers));
-
-		//write out playersInUse to file 
-		fout.write((const char*)&playersInUse, sizeof(playersInUse));
-		*/
 		std::fstream file;
 		file.open(filename, std::ios_base::out | std::ios_base::binary);
 
 		if (file.is_open())
 		{
 			//save how many players are in the list
-			file.write((const char*)playersInUse, sizeof(unsigned int*));
+			file.write((char*)&playersInUse, sizeof(unsigned int));
 
-			for (int i = 0; i, playerList; ++i)
+			for (int i = 0; i < playersInUse; ++i)
 			{
 				//save player details (name and highscore) individually
-				file.write((const char*)playerList[i].GetName(), sizeof(char*));
-				file.write((const char*)playerList[i].GetHighScore(), sizeof(unsigned int));
+				file.write((char*)&playerList[i], sizeof(Player));
 			}
 		}
 		else
@@ -259,44 +187,6 @@ bool Leaderboard::Save(const char* filename)
 		}
 		file.close();
 		return true;
-	/*}
-
-
-	return false;*/
 }
-
-
-//bool Leaderboard::Search(const std::string& name, unsigned int& posFound)
-//{
-//	//Need to sort collection before doing a binary search 
-//	SortByName();
-//
-//	unsigned int l = 0;
-//	unsigned int r = playersInUse - 1;
-//	unsigned int m;
-//
-//	while (l <= r)
-//	{
-//		m = (l + r) / 2;
-//
-//		if (name == playerList[m].GetName())
-//		{
-//			posFound = m;
-//			return true;
-//		}
-//
-//		else if (name < playerList[m].GetName())
-//		{
-//			r = m - 1;
-//		}
-//
-//		else if (name > playerList[m].GetName())
-//		{
-//			l = m + 1;
-//		}
-//	}
-//
-//	return false;
-//}
 
 
